@@ -17,7 +17,7 @@ np.random.seed(1)
 
 syn0 = 2 * np.random.random((3, 1)) - 1
 
-for iter in xrange(10):
+for iter in xrange(10000):
 
     l0 = X
     l1 = nonlin(np.dot(l0, syn0))
