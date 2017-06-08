@@ -15,6 +15,7 @@ class App extends Component {
         {/*<h1>{this.state.headerText}</h1>*/}
         <Header />
         <Content />
+        <ShowTime />
       </div>
     );
   }
@@ -25,7 +26,7 @@ class Header extends Component{
     return (
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h2></h2>
+        <h2>Hello</h2>
       </div>
     );
   }
@@ -82,6 +83,39 @@ class TableRow extends Component{
         <td>{this.props.data.name}</td>
         <td>{this.props.data.age}</td>
       </tr>
+    );
+  }
+}
+
+class ShowTime extends Component{
+  
+  constructor(props){
+    super(props)
+
+    this.state = {date: new Date()}
+  }
+
+  componentDidMount(){
+    this.timeID = setInterval(
+      () => {this.tick()}
+      , 1000)
+  }
+
+  tick(){
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  componentWillUnMount(){
+    clearInterval(this.timeID)
+  }
+
+  render(){
+    return(
+      <div>
+        <h2>The current time is {this.state.date.toLocaleTimeString()}</h2>
+      </div>
     );
   }
 }
