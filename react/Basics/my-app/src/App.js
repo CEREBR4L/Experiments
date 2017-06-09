@@ -6,20 +6,28 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      headerText: "Welcome to React"
+      headerText: "Welcome to React",
+      contentText: "Lmao"
     };
   }
   render() {
     return (
       <div className="App">
         {/*<h1>{this.state.headerText}</h1>*/}
-        <Header />
-        <Content />
+        <Header header={this.state.headerText} />
+        <Content content={this.state.contentText}/>
+        {/*<p>{this.props.header}</p>
+        <p>{this.props.content}</p>*/}
         <ShowTime />
       </div>
     );
   }
 }
+
+App.defaultProps = {
+  header: "Default props for the header...",
+  content: "Content props for the header..."
+};
 
 class Header extends Component{
   render(){
@@ -27,6 +35,7 @@ class Header extends Component{
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h2>Hello</h2>
+        <p>{this.props.header}</p>
       </div>
     );
   }
@@ -60,6 +69,7 @@ class Content extends Component{
     return (
       <p className="App-intro">
         <h1>My page starts here...</h1>
+        <p>{this.props.content}</p>
         <table>
           <thead>
             <th>ID</th>
