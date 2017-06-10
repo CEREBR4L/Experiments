@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
 
@@ -14,7 +15,7 @@ class App extends Component {
     return (
       <div className="App">
         {/*<h1>{this.state.headerText}</h1>*/}
-        <Header header={this.state.headerText} />
+        <Header />
         <Content content={this.state.contentText}/>
         {/*<p>{this.props.header}</p>
         <p>{this.props.content}</p>*/}
@@ -51,6 +52,8 @@ class Content extends Component{
     };
 
     this.updateState = this.updateState.bind(this)
+    this.updateNumber = this.updateNumber.bind(this)
+    this.findDOMNode = this.findDOMNode.bind(this)
   }
 
   updateState(){
@@ -62,6 +65,15 @@ class Content extends Component{
     this.setState({data: myArray, count: count})
   }
 
+  updateNumber(){
+    this.forceUpdate();
+  }
+
+  findDOMNode(){
+    var myDIV = document.getElementById('myDiv')
+    ReactDOM.findDOMNode(myDIV).style.color = 'red';
+  }
+
   render(){
     return (
       <div>
@@ -70,6 +82,11 @@ class Content extends Component{
           <p>{this.props.content}</p>
           <button onClick={this.updateState}>Click Me</button>
           <h4>State Data: {this.state.data}</h4>  
+          <button onClick={this.updateNumber}>Random Num</button>
+          <h4>Ran No: {Math.random()}</h4>
+
+          <button onClick={this.findDOMNode}>Find DOM NODE</button>
+          <div id="myDiv">this is my div</div>
           {/*<table>
             <thead>
               <th>ID</th>
