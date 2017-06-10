@@ -67,21 +67,52 @@ class Content extends Component{
   }
   render(){
     return (
-      <p className="App-intro">
-        <h1>My page starts here...</h1>
-        <p>{this.props.content}</p>
-        <table>
-          <thead>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-          </thead>
-          <tbody>
-            {this.state.data.map((person, i) => <TableRow key={i} data={person}/>)}
-          </tbody>
-        </table>
-      </p>
+      <div>
+        <div className="App-intro">
+          <h1>My page starts here...</h1>
+          <p>{this.props.content}</p>
+          {/*<table>
+            <thead>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Age</th>
+            </thead>
+            <tbody>
+              {this.state.data.map((person, i) => <TableRow key={i} data={person}/>)}
+            </tbody>
+          </table>*/}
+        </div>
+        <div>
+          <h4>Array: {this.props.propArray}</h4>
+          <h4>Bool: {this.props.propBool ? "True" : "False"}</h4>
+          <h4>Function: {this.props.propFunc(5)}</h4>
+          <h4>Number: {this.props.propNum}</h4>
+          <h4>String: {this.props.propString}</h4>
+          <h4>Object: {this.props.propObject.name + ', ' + this.props.propObject.age}</h4>
+        </div>
+      </div>
     );
+  }
+}
+
+Content.protoTypes = {
+  propArray: React.PropTypes.array.isRequired,
+  propBool: React.PropTypes.bool.isRequired,
+  propFunc: React.PropTypes.func,
+  propNum: React.PropTypes.number,
+  propString: React.PropTypes.string,
+  propObject: React.PropTypes.object
+};
+
+Content.defaultProps = {
+  propArray: [1,2,3,4,5],
+  propBool: true,
+  propFunc: function(e){return e},
+  propNum: 2,
+  propString: "String here",
+  propObject: {
+    name: "Jeff",
+    age: 34
   }
 }
 
