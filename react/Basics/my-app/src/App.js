@@ -46,31 +46,30 @@ class Content extends Component{
     super(props);
 
     this.state = {
-      data: [
-        {
-          "id": 1,
-          "name": "Foo",
-          "age": "25"
-        },
-        {
-          "id": 2,
-          "name": "Bar",
-          "age": "19"
-        },
-        {
-          "id": 3,
-          "name": "Jeff",
-          "age": "45"
-        }
-      ]
+      data: [],
+      count: 0
     };
+
+    this.updateState = this.updateState.bind(this)
   }
+
+  updateState(){
+    var count = this.state.count;
+    count++;
+    var item = " Click - " + count;
+    var myArray = this.state.data;
+    myArray.push(item);
+    this.setState({data: myArray, count: count})
+  }
+
   render(){
     return (
       <div>
         <div className="App-intro">
           <h1>My page starts here...</h1>
           <p>{this.props.content}</p>
+          <button onClick={this.updateState}>Click Me</button>
+          <h4>State Data: {this.state.data}</h4>  
           {/*<table>
             <thead>
               <th>ID</th>
