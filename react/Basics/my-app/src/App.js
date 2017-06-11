@@ -54,6 +54,11 @@ class Content extends Component{
     this.updateState = this.updateState.bind(this)
     this.updateNumber = this.updateNumber.bind(this)
     this.findDOMNode = this.findDOMNode.bind(this)
+    this.setNewNumber = this.setNewNumber.bind(this)
+  }
+
+  setNewNumber(){
+    this.setState({count: this.state.count + 1})
   }
 
   updateState(){
@@ -106,6 +111,10 @@ class Content extends Component{
           <h4>String: {this.props.propString}</h4>
           <h4>Object: {this.props.propObject.name + ', ' + this.props.propObject.age}</h4>
         </div>
+        <div>
+          <button onClick={this.setNewNumber}>Update Number</button>
+          <NumberComp myNum={this.state.count}/>
+        </div>
       </div>
     );
   }
@@ -129,6 +138,45 @@ Content.defaultProps = {
   propObject: {
     name: "Jeff",
     age: 34
+  }
+}
+
+class NumberComp extends Component{
+  componentWillMount(){
+    console.log('called the comp will mount');
+  }
+
+  componentDidMount(){
+    console.log('called the comp did mount');
+  }
+
+  componentWillReceiveProps(newProps){
+    console.log('called the comp Will Receive Prop');
+  }
+
+  shouldComponentUpdate(newProps, nextState){
+    console.log('called the should Component Update');
+    return true;
+  }
+
+  componentWillUpdate(newProps, nextState){
+    console.log('called the comp will update');
+  }
+
+  componentDidUpdate(newProps, nextState){
+    console.log('called the comp DID update');
+  }
+
+  componentWillUnmount(){
+    console.log('called the comp will unmount');
+  }
+
+  render(){
+    return (
+      <div>
+        <h4>{this.props.myNum}</h4>
+      </div>
+    );
   }
 }
 
