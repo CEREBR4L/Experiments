@@ -16,10 +16,11 @@ class App extends Component {
       <div className="App">
         {/*<h1>{this.state.headerText}</h1>*/}
         <Header />
-        <Content content={this.state.contentText}/>
+        <Form />
+        {/*<Content content={this.state.contentText}/>
         {/*<p>{this.props.header}</p>
-        <p>{this.props.content}</p>*/}
-        <ShowTime />
+        <p>{this.props.content}</p>
+        <ShowTime />*/}
       </div>
     );
   }
@@ -35,11 +36,44 @@ class Header extends Component{
     return (
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h2>Hello</h2>
-        <p>{this.props.header}</p>
+        <h2>REACT</h2>
       </div>
     );
   }
+}
+
+class Form extends Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      myInputVal: "My Input"
+    }
+
+    this.inputChange = this.inputChange.bind(this)
+  }
+
+  inputChange(e){  
+    this.setState({myInputVal: e.target.value})
+  }
+
+  render(){
+    return (
+      <div>
+        <InputText inputVal={this.state.myInputVal} inputChange={this.inputChange} />
+        <h4>{this.state.myInputVal}</h4>
+      </div>
+    )}
+}
+
+
+class InputText extends Component{
+  render(){
+    return (
+      <div>
+        <input type="text" value={this.props.myInputVal} onChange={this.props.inputChange}/>
+      </div>
+    )}
 }
 
 class Content extends Component{
