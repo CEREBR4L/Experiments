@@ -17,6 +17,8 @@ class App extends Component {
         {/*<h1>{this.state.headerText}</h1>*/}
         <Header />
         <Form />
+        <InputTextArea />
+        <SelectBoxForm />
         {/*<Content content={this.state.contentText}/>
         {/*<p>{this.props.header}</p>
         <p>{this.props.content}</p>
@@ -73,6 +75,75 @@ class InputText extends Component{
       <div>
         <input type="text" value={this.props.myInputVal} onChange={this.props.inputChange}/>
       </div>
+    )}
+}
+
+class InputTextArea extends Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      val: "Once upon a time..."
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleChange(e){
+    this.setState({val: e.target.value})
+  }
+
+  handleSubmit(e){
+    alert(this.state.val)
+    e.preventDefault()
+  }
+
+  render(){
+    return (
+      <form onSubmit={this.handleSubmit} >
+        <textarea type="text" value={this.state.val} onChange={this.handleChange}></textarea>
+        <h4>{this.state.val}</h4>
+        <input type="submit"/>
+      </form>
+    )}
+}
+
+class SelectBoxForm extends Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      value: "grapefrooot"
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleChange(e){
+    this.setState({value: e.target.value})
+  }
+
+  handleSubmit(e){
+    alert(this.state.value)
+    e.preventDefault()
+  }
+
+  render(){
+    return (
+      <form onSubmit={this.handleSubmit} >
+        <label>
+          Pick ya flavah
+          <select onChange={this.handleChange}>
+            <option value="grapefrooot">Grapefrooot</option>
+            <option value="orange">Orange</option>
+            <option value="apppelleee">Apppelleee</option>
+            <option value="cocolatte">Cocolatte</option>
+          </select>
+        </label>
+        <input type="submit"/>
+      </form>
     )}
 }
 
