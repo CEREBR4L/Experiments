@@ -16,11 +16,12 @@ class App extends Component {
       <div className="App">
         {/*<h1>{this.state.headerText}</h1>*/}
         <Header />
-        <Form />
+        {/*<Form />
         <InputTextArea />
-        <SelectBoxForm />
+        <SelectBoxForm />*/}
+        <Reservation />
         {/*<Content content={this.state.contentText}/>
-        {/*<p>{this.props.header}</p>
+        <p>{this.props.header}</p>
         <p>{this.props.content}</p>
         <ShowTime />*/}
       </div>
@@ -65,6 +66,50 @@ class Form extends Component{
         <InputText inputVal={this.state.myInputVal} inputChange={this.inputChange} />
         <h4>{this.state.myInputVal}</h4>
       </div>
+    )}
+}
+
+class Reservation extends Component{
+  constructor(props){
+    super(props);
+
+    this.state = {
+      isGoing: true,
+      noOfGuests: 2
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    
+  }
+
+  handleInputChange(e){
+    const target = e.target;
+    const val = target.type === "checkbox" ? target.checked : target.value
+    const name = target.name
+
+    this.setState({
+      [name]: val
+    })
+  }
+
+  handleSubmit(e){
+    alert(this.state.noOfGuests + " " + this.state.isGoing)
+    e.preventDefault()
+  }
+  render(){
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Are you going?
+          <input type="checkbox" name="isGoing" checked={this.state.isGoing} onChange={this.handleInputChange}/>
+        </label>
+        <label>
+          Number of guests?
+          <input type="number" name="noOfGuests" value={this.state.noOfGuests} onChange={this.handleInputChange}/>
+        </label>
+        <input type="submit"/>
+      </form>
     )}
 }
 
