@@ -12,6 +12,9 @@ class App extends Component {
     };
   }
   render() {
+    const style = {
+      margin: '0',
+    }
     return (
       <div className="App">
         {/*<h1>{this.state.headerText}</h1>*/}
@@ -19,7 +22,7 @@ class App extends Component {
         {/*<Form />
         <InputTextArea />
         <SelectBoxForm />*/}
-        <Reservation />
+        <Reservation style={style}/>
         {/*<Content content={this.state.contentText}/>
         <p>{this.props.header}</p>
         <p>{this.props.content}</p>
@@ -98,17 +101,26 @@ class Reservation extends Component{
     e.preventDefault()
   }
   render(){
+    const style = {
+      form: {
+        margin: '50px'
+      },
+
+      element: {
+        display: 'block'
+      }
+    }
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form onSubmit={this.handleSubmit} style={style.form}>
+        <label style={style.element}>
           Are you going?
           <input type="checkbox" name="isGoing" checked={this.state.isGoing} onChange={this.handleInputChange}/>
         </label>
-        <label>
+        <label style={style.element}>
           Number of guests?
           <input type="number" name="noOfGuests" value={this.state.noOfGuests} onChange={this.handleInputChange}/>
         </label>
-        <input type="submit"/>
+        <input type="submit" style={style.element}/>
       </form>
     )}
 }
