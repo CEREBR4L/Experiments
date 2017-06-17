@@ -17,13 +17,15 @@ class App extends Component {
     }
     return (
       <div className="App">
-        {/*<h1>{this.state.headerText}</h1>*/}
+
+        
+        <h1>{this.state.headerText}</h1>
         <Header />
         {/*<Form />
         <InputTextArea />
-        <SelectBoxForm />*/}
+        <SelectBoxForm />
         <Reservation style={style}/>
-        {/*<Content content={this.state.contentText}/>
+        <Content content={this.state.contentText}/>
         <p>{this.props.header}</p>
         <p>{this.props.content}</p>
         <ShowTime />*/}
