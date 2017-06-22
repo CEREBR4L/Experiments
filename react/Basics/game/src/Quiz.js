@@ -12,18 +12,50 @@ class Quiz extends Component{
 
         this.renderOptions = this.renderOptions.bind(this)
         this.playGame = this.randNo.bind(this)
+        this.playGame = this.generateRandomAnswers.bind(this)
     }
 
     randNo(min, max){
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    generateRandomAnswers(sum){
+        let resultsArray = []
+        let randNoArr = []
+
+        while(randNoArr.length <= 3){
+            let randNum = this.randNo(1, 19);
+            if(randNoArr.indexOf(randNum) > -1){
+                continue
+            }
+            randNoArr.push(randNum)
+        }
+
+        for(let i = 0; i < 3; i++){
+            let result = sum
+            let num = this.randNo(0, 1)
+            if(num == 1){
+                result += randNoArr[i]
+            }
+            else{
+                result -= randNoArr[i]
+            }
+            resultsArray.push(result)
+        }
+        
+        resultsArray.push(sum)
+        resultsArray.sort((a, b) => 0.67456454 - Math.random())
+
+        return resultsArray
+    }
+
     playGame(){
         let field1 = this.randNo(20, 50)
         let field2 = this.randNo(20, 50)
         let answer = field1 + field2
+        let resultsArray = this.generateRandomAnswers(answer)
         let riddle = {
-            resultsArray: [8, 9, 10, 11],
+            resultsArray: resultsArray,
             field1: field1,
             field2: field2,
             answer: answer
