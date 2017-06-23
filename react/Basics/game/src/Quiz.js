@@ -7,12 +7,24 @@ class Quiz extends Component{
         super()
 
         let riddle = this.playGame()
+        let correct = false
+        let gameOver = false
 
-        this.state= { riddle }
+        this.state = { riddle, correct, gameOver }
 
         this.renderOptions = this.renderOptions.bind(this)
-        this.playGame = this.randNo.bind(this)
-        this.playGame = this.generateRandomAnswers.bind(this)
+        this.checkResults = this.checkResults.bind(this)
+    }
+
+    checkResults(option){
+        if(this.state.riddle.answer === option){
+            console.log("Correct")
+            this.setState({correct: true, gameOver: true})
+        }
+        else{
+            console.log("Wrong")
+            this.setState({correct: false, gameOver: true})
+        }
     }
 
     randNo(min, max){
@@ -68,7 +80,7 @@ class Quiz extends Component{
         return(
             <div className="options">
                 {this.state.riddle.resultsArray.map(
-                    (option, i) => <QuizOptions option={option} key={i}/>
+                    (option, i) => <QuizOptions option={option} key={i} checkResult={this.checkResults}/>
                 )}
             </div>
         )
