@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import QuizOptions from './QuizOptions';
+import classNames from 'classnames';
 
 class Quiz extends Component{
 
@@ -14,15 +15,14 @@ class Quiz extends Component{
 
         this.renderOptions = this.renderOptions.bind(this)
         this.checkResults = this.checkResults.bind(this)
+        this.restart = this.restart.bind(this)
     }
 
     checkResults(option){
         if(this.state.riddle.answer === option){
-            console.log("Correct")
             this.setState({correct: true, gameOver: true})
         }
         else{
-            console.log("Wrong")
             this.setState({correct: false, gameOver: true})
         }
     }
@@ -73,6 +73,10 @@ class Quiz extends Component{
             answer: answer
         }
 
+        if(this.state && this.state.gameOver){
+            this.setState({riddle: riddle})
+        }
+
         return riddle
     }
 
@@ -86,6 +90,19 @@ class Quiz extends Component{
         )
     }
 
+    renderMessage(){
+        if(this.state.correct){
+            return <h3>Correct: pess the button below to reply.</h3>
+        }
+        
+        return <h3>Incorrect: pess the button below to reply.</h3>
+    }
+
+    restart(){
+        this.setState({correct: false, gameOver: false})
+        this.playGame()
+    }
+
     render(){
         return(
             <div className="quiz">
@@ -93,8 +110,11 @@ class Quiz extends Component{
                     <p className="question">What is the sum of <span className="text-info">{this.state.riddle.field1}</span> and <span className="text-info">{this.state.riddle.field2}</span>?</p>
                     {this.renderOptions()}
                 </div>
+                <div className={classNames("after", {"hide": !this.state.gameOver}, {"wrong": !this.state.correct}, {"correct": this.state.correct})}>
+                    {this.renderMessage()}
+                </div>
                 <div className="play-again">
-                    <a href="" className="button">Play Again?</a>
+                    <a href="" className="button" onClick={this.restart}>Play Again?</a>
                 </div>
             </div>
         )
