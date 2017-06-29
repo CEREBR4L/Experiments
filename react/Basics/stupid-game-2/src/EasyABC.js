@@ -13,6 +13,16 @@ class EasyABC extends Component{
         }
 
         this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
+    }
+
+    previous(){
+        if(this.state.currentPosition === 0){
+            this.setState({currentPosition: 25, currentTick: 0})
+        }
+        else{
+            this.setState({currentPosition: this.state.currentPosition - 1, currentTick: 0})
+        }
     }
 
     next(){
@@ -20,7 +30,12 @@ class EasyABC extends Component{
             this.setState({currentTick: this.state.currentTick+1})
         }
         else{
-            this.setState({currentPosition: this.state.currentPosition + 1, currentTick: 0})
+            if(this.state.currentPosition === 25){
+                this.setState({currentPosition: 0, currentTick: 0})
+            }
+            else{
+                this.setState({currentPosition: this.state.currentPosition + 1, currentTick: 0})
+            }
         }
     }
 
@@ -36,7 +51,7 @@ class EasyABC extends Component{
                         </div>
                     </div>
                     <div className="buttons">
-                        <a className="button prev">Previous</a>
+                        <a className="button prev" onClick={this.previous}>Previous</a>
                         <a className="button sound">Play Sound Again</a>
                         <a className="button next" onClick={this.next}>Next</a>
                     </div>
