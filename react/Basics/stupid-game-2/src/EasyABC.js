@@ -12,8 +12,9 @@ class EasyABC extends Component{
             currentTick: 0
         }
 
-        this.next = this.next.bind(this);
-        this.previous = this.previous.bind(this);
+        this.next = this.next.bind(this)
+        this.previous = this.previous.bind(this)
+        this.playSound = this.playSound.bind(this)
     }
 
     previous(){
@@ -39,6 +40,32 @@ class EasyABC extends Component{
         }
     }
 
+    playSound(){
+        let letterSound = document.querySelector(`audio[data-key="letter"]`)
+        let wordSound = document.querySelector(`audio[data-key="word"]`)
+
+        if(this.state.currentTick === 0){
+            letterSound.currentTime = 0;
+            letterSound.play()
+        }
+        else{
+            wordSound.currentTime = 0;
+            wordSound.play()
+        }
+    }
+
+    componentDidUpdate(){
+        this.playSound()
+    }
+
+    componentDidMount(){
+        let letterSound = document.querySelector(`audio[data-key="letter"]`)
+        if(this.state.currentTick === 0){
+            letterSound.currentTime = 0;
+            letterSound.play()
+        }
+    }
+
     render(){
         let showImg = this.state.currentTick !== 0 ? true : false;
         let showWord = this.state.currentTick === 2 ? true : false;
@@ -48,11 +75,12 @@ class EasyABC extends Component{
                     <div className="fields">
                         <div className="field-block">
                             {this.state.alphabets[this.state.currentPosition].letter}
+                            <audio src={this.state.alphabets[this.state.currentPosition].letterSound} data-key="letter"></audio>
                         </div>
                     </div>
                     <div className="buttons">
                         <a className="button prev" onClick={this.previous}>Previous</a>
-                        <a className="button sound">Play Sound Again</a>
+                        <a className="button sound" onClick={this.playSound}>Play Sound Again</a>
                         <a className="button next" onClick={this.next}>Next</a>
                     </div>
                     <div className="fields">
@@ -63,10 +91,12 @@ class EasyABC extends Component{
                                      alt={this.state.alphabets[this.state.currentPosition].word}
                                      src={this.state.alphabets[this.state.currentPosition].image} 
                                 />
+                                <audio src={this.state.alphabets[this.state.currentPosition].wordSound} data-key="word"></audio>
                             </div>
                             <div className="right-field">
                                 <div className={classNames('placeholder-span', {hide: showWord})}>Click Next To View Spelling</div>
                                 <div className={classNames('word', {hide: !showWord})} >{this.state.alphabets[this.state.currentPosition].word.toUpperCase()}</div>
+                                <audio src={this.state.alphabets[this.state.currentPosition].letterSound} data-key="letter"></audio>
                             </div>
                         </div>
                     </div>
