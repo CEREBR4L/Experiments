@@ -3,6 +3,8 @@ import './App.css';
 import Experience from './experience'
 import Projects from './projects'
 import Skills from './skills'
+import Education from './education'
+import Languages from './languages'
 import resume from './resume.json';
 
 class App extends Component {
@@ -21,6 +23,24 @@ class App extends Component {
     renderProjs(){
         let results = [];
         resume.projects.map((item, i) => results.push(<Projects item={item} key={i} />))
+        return results
+    }
+
+    renderEdu(){
+        let results = [];
+        resume.education.map((item, i) => results.push(<Education item={item} key={i} />))
+        return results
+    }
+
+    renderLangs(){
+        let results = [];
+        resume.languages.map((item, i) => results.push(<Languages item={item} key={i} />))
+        return results
+    }
+
+    renderInterests(){
+        let results = [];
+        resume.interests.map((item, i) => results.push(<li key={i}>{item}</li>))
         return results
     }
 
@@ -44,33 +64,20 @@ class App extends Component {
             </div>
             <div className="education-container container-block">
                 <h2 className="container-block-title">Education</h2>
-                <div className="item">
-                    <h4 className="degree">MSc in Computer Science</h4>
-                    <h5 className="meta">University of London</h5>
-                    <div className="time">2011 - 2012</div>
-                </div>
-                <div className="item">
-                    <h4 className="degree">BSc in Applied Mathematics</h4>
-                    <h5 className="meta">Bristol University</h5>
-                    <div className="time">2007 - 2011</div>
-                </div>
+                {this.renderEdu()}
             </div>
             
             <div className="languages-container container-block">
                 <h2 className="container-block-title">Languages</h2>
                 <ul className="list-unstyled interests-list">
-                    <li>English <span className="lang-desc">(Native)</span></li>
-                    <li>French <span className="lang-desc">(Professional)</span></li>
-                    <li>Spanish <span className="lang-desc">(Professional)</span></li>
+                    {this.renderLangs()}
                 </ul>
             </div>
             
             <div className="interests-container container-block">
                 <h2 className="container-block-title">Interests</h2>
                 <ul className="list-unstyled interests-list">
-                    <li>Climbing</li>
-                    <li>Snowboarding</li>
-                    <li>Cooking</li>
+                    {this.renderInterests()}
                 </ul>
             </div>
             
@@ -87,11 +94,7 @@ class App extends Component {
             
             <section className="section experiences-section">
                 <h2 className="section-title"><i className="fa fa-briefcase"></i>Experiences</h2>
-                
-
                 {this.renderExp()}
-                
-                
             </section>
             
             <section className="section projects-section">
@@ -106,7 +109,6 @@ class App extends Component {
                 <h2 className="section-title"><i className="fa fa-rocket"></i>Skills &amp; Proficiency</h2>
                 <div className="skillset">        
                     {this.renderSkills()}
-                    
                 </div>  
             </section>
             
