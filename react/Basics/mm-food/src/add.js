@@ -8,6 +8,7 @@ class Add extends Component {
         super(props)
 
         this.state = {
+            recipes: JSON.parse(localStorage.getItem('recipes')) || [],
             newRecipe: {
                 name: "New Recipe",
                 desc: "A description here",
@@ -23,7 +24,13 @@ class Add extends Component {
         newRecipe.name = this.name.value
         newRecipe.desc = this.desc.value
         this.setState(newRecipe)
-        console.log(this.state.newRecipe)
+        
+        let recipes = this.state.recipes
+        recipes.push(newRecipe)
+        this.setState({recipes})
+
+        localStorage.setItem('recipes', JSON.stringify(recipes))
+        this.props.history.push('/')
     }
 
     addIngredients(qty, ingredient){
