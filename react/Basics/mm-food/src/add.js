@@ -1,19 +1,35 @@
 import React, { Component } from 'react';
 import './App.css';
 import Ingredients from './ingredients'
+import IngredientList from './ingredientList'
 
 class Add extends Component {
     constructor(props){
         super(props)
 
-        this.state = {}
+        this.state = {
+            newRecipe: {
+                name: "New Recipe",
+                desc: "A description here",
+                ingredients: []
+            }
+        }
 
         this.submitRecipe = this.submitRecipe.bind(this)
     }
 
     submitRecipe(){
-        console.log(this.name.value)
-        console.log(this.desc.value)
+        let newRecipe = this.state.newRecipe
+        newRecipe.name = this.name.value
+        newRecipe.desc = this.desc.value
+        this.setState(newRecipe)
+        console.log(this.state.newRecipe)
+    }
+
+    addIngredients(qty, ingredient){
+        let newRecipe = this.state.newRecipe
+        newRecipe.ingredients.push({qty: qty, ingredient: ingredient})
+        this.setState({newRecipe: newRecipe})
     }
 
   render() {
@@ -41,7 +57,8 @@ class Add extends Component {
                             ref={(input) => this.desc = input}
                         />
                     </div>
-                    <Ingredients />
+                    <IngredientList recipe={this.state.newRecipe} />
+                    <Ingredients addIngredients={(q, i) => this.addIngredients(q, i)} />
                     <div className="col-xs-12">
                         <button type="button" className="btn btn-default" onClick={this.submitRecipe}>Submit</button>
                     </div>
