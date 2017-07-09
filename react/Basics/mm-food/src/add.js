@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Ingredients from './ingredients'
 
 class Add extends Component {
     constructor(props){
@@ -7,41 +8,42 @@ class Add extends Component {
 
         this.state = {}
 
-        this.goHome = this.goHome.bind(this)
+        this.submitRecipe = this.submitRecipe.bind(this)
     }
 
-    goHome(){
-        console.log('btn clikd')
-        this.props.history.push('/')
+    submitRecipe(){
+        console.log(this.name.value)
+        console.log(this.desc.value)
     }
+
   render() {
     return (
-        <div classNameName="row">
-            <div classNameName="col-xs-12">
+        <div className="row">
+            <div className="col-xs-12">
                 <h1>Add Recipe</h1> 
                 <form>
                     <div className="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" className="form-control" id="name" placeholder="Recipe Name" />
+                        <label htmlFor="name">Name</label>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            id="name" 
+                            placeholder="Recipe Name" 
+                            ref={(input) => this.name = input}
+                        />
                     </div>
                     <div className="form-group">
-                        <label for="desc">Description</label>
-                        <textarea className="form-control" id="desc" placeholder="Enter description" />
+                        <label htmlFor="desc">Description</label>
+                        <textarea 
+                            className="form-control" 
+                            id="desc" 
+                            placeholder="Enter description" 
+                            ref={(input) => this.desc = input}
+                        />
                     </div>
-                    <div className="form-group col-xs-5">
-                        <label for="qty">Quantity</label>
-                        <input type="text" className="form-control" id="qty" placeholder="Enter description" />
-                    </div>
-                    <div className="form-group col-xs-5">
-                        <label for="item">Ingredient</label>
-                        <input type="text" className="form-control" id="item" placeholder="Enter description" />
-                    </div>
-                    <div className="col-xs-2">
-                        <label for="item">Add</label>
-                        <button type="submit" className="btn btn-info form-control">Add</button>
-                    </div>
+                    <Ingredients />
                     <div className="col-xs-12">
-                        <button type="submit" className="btn btn-default">Submit</button>
+                        <button type="button" className="btn btn-default" onClick={this.submitRecipe}>Submit</button>
                     </div>
                 </form>
             </div>
